@@ -1,0 +1,43 @@
+<%= form_for (@book) do |f| %>
+<% if @book.errors.any? %>
+    <h2><%= pluralize(@book.errors.count, 'errors') %> Han evitado al libro de crearse</h2>
+    <ul>
+        <% @book.errors.full.messages.each do |msg| %>
+            <li><%= msg %>
+        <% end %>
+    </ul>
+<% end %>
+
+
+<div class= 'form-group'>
+    <%= f.label :title, 'ingrese un titulo' %>
+    <%= f.text_field :title, class: 'form-control' %>
+</div>
+
+<div class= 'form-group'>
+    <%= f.label :author, 'ingrese el autor' %>
+    <%= f.text_field :author, class: 'form-control' %>
+</div>
+
+<div class= 'form-group'>
+    <%= f.label :status %>
+    <%= f.select :status, options_for_select(@statuses), {}, class: 'form-control' %>
+</div>
+
+<div class= 'form-group'>
+    <%= f.label :book_lent_on, 'prestado el' %>
+    <%= f.date_select :book_lent_on, {}, class: 'form-control' %>
+</div>
+
+<div class= 'form-group'>
+    <%= f.label :book_returned_on, 'regresado' %>
+    <%= f.date_select :book_returned_on, {}, class: 'form-control' %>
+</div>
+
+<div class= 'actions'>
+   <%= f.submit %>
+</div>
+
+<% end %>
+
+<%= link_to "crear libro", new_book_path %>
